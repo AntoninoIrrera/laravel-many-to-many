@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Validator;
@@ -18,7 +19,8 @@ class ProjectController extends Controller
             'relase_date' => 'required|date',
             'image' => 'max:300|image',
             'description' => '',
-            'type_id' => 'required|exists:types,id'
+            'type_id' => 'required|exists:types,id',
+            'technologies' => 'required|exists:technologies,id|array'
         ];
     protected $messaggiValidazione = [
             'title.required' => 'il campo è obbligatorio.',
@@ -29,7 +31,9 @@ class ProjectController extends Controller
             'image.image' => 'inserire un immagine valida.',
             'image.max' => "l'immagine inserita e troppo grande, deve pesare massimo 300kb.",
             'type_id.required' => 'il campo è obbligatorio.',
-            'type_id.exists' => 'il campo selezionato non esiste.'
+            'type_id.exists' => 'il campo selezionato non esiste.',
+            'technologies.required' => 'il campo è obbligatorio.',
+            'technologies.exists' => 'il campo selezionato non esiste.'
         ];
 
 
@@ -56,8 +60,9 @@ class ProjectController extends Controller
     {
         $project = new Project();
         $types = Type::all();
+        $technologies = Technology::all();
 
-        return view('admin.project.create', compact('project', 'types'));
+        return view('admin.project.create', compact('project', 'types','technologies'));
     }
 
     /**
@@ -78,6 +83,7 @@ class ProjectController extends Controller
         $newProject = new Project();
         $newProject->fill($data);
         $newProject->save();
+        $newProject->technologies()->sync($data['technologies']);
 
         return redirect()->route('admin.project.show',$newProject->id)->with('message',"l'elemento è stato creato correttamente");
     }
@@ -107,8 +113,9 @@ class ProjectController extends Controller
     {
         // $project = Project::findOrFail($id);
         $types = Type::all();
+        $technologies = Technology::all();
 
-        return view('admin.project.edit', compact('project','types'));
+        return view('admin.project.edit', compact('project','types',"technologies"));
     }
 
     /**
@@ -141,6 +148,7 @@ class ProjectController extends Controller
 
 
         $project->update($data);
+        $project->technologies()->sync($data['technologies']);
 
         return redirect()->route('admin.project.show', $project->id)->with('message', "l'elemento è stato modificato correttamente");
     }
@@ -155,6 +163,7 @@ class ProjectController extends Controller
     {
         // $project = Project::findOrFail($id);
 
+        // $project->technologies()->sync([]);
         $project->delete();
 
         if (isset($project->image)) {

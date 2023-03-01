@@ -23,7 +23,7 @@
             <label class="form-label" for="type">Inserisci il type</label>
             <select class="form-control {{$errors->has('type_id') ? 'is-invalid' : '' }} " name="type_id" id="type">
                 @foreach($types as $type)
-                <option value="{{$type->id}}" {{ old('type_id',$project->type_id) == $type->id ? 'selected' : '' }} >{{$type->name}}</option>
+                <option value="{{$type->id}}" {{ old('type_id',$project->type_id) == $type->id ? 'selected' : '' }}>{{$type->name}}</option>
                 @endforeach
             </select>
             @if($errors->has('type_id'))
@@ -36,7 +36,20 @@
 
         </div>
 
+        <div class="mb-3">
+            @foreach($technologies as $technology)
+            <input type="checkbox" class="form-check-input {{$errors->has('technologies') ? 'is-invalid' : '' }} " {{$project->technologies->contains($technology->id) ? 'checked' : ''}} name="technologies[]" value="{{$technology->id}}">
+            <label class="form-check-label"> {{$technology->name}} </label>
+            @endforeach
+            @if($errors->has('technologies'))
+            <div class="alert alert-danger mt-3">
+                @foreach ($errors->get('technologies') as $error)
+                {{$error}}
+                @endforeach
+            </div>
+            @endif
 
+        </div>
 
 
 
