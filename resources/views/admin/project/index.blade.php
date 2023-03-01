@@ -26,6 +26,7 @@
                 <th scope="col">title</th>
                 <th scope="col">relase date</th>
                 <th scope="col">type</th>
+                <th scope="col">technologies</th>
                 <th scope="col">operations</th>
             </tr>
         </thead>
@@ -36,6 +37,11 @@
                 <td>{{$project['title']}}</td>
                 <td>{{$project['relase_date']}}</td>
                 <td>{{$project->type->name}}</td>
+                <td>
+                    @foreach ($project->technologies as $technology)
+                        - {{$technology->name}} vs: {{$technology->versione}} -
+                    @endforeach
+                </td>
                 <td>
                     <a href="{{route('admin.project.show',$project['id'])}}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
                     <a href="{{route('admin.project.edit',$project['id'])}}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
