@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('type_id')->after('id');
 
 
-            $table->foreign('type_id')->references('id')->on('types');
+            $table->foreign('type_id')->references('id')->on('types')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
