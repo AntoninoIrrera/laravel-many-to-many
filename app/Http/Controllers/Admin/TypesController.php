@@ -22,6 +22,7 @@ class TypesController extends Controller
         'color.required' => 'il campo è obbligatorio.',
         'color.max' => 'il campo non può contenere più di 10 caratteri.',
         'image.URL' => 'inserire un URL valido e attivo.',
+        'image.required' => 'il campo è obbligatorio.',
         
     ];
 
@@ -124,11 +125,13 @@ class TypesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Type $type
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Type $type)
     {
-        //
+        $type->delete();
+
+        return redirect()->route('admin.type.index')->with('message', "l'elemento è stato eliminato correttamente");
     }
 }

@@ -53,6 +53,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('/admin/type') }}">{{ __('types') }}</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url('/admin/technology') }}">{{ __('technologies') }}</a>
+                        </li>
                         @else
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('/project') }}">{{ __('projects') }}</a>
