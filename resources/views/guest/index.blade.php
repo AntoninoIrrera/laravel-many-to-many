@@ -21,7 +21,13 @@
     @foreach ($projects as $project)
     <div class="card mt-3 mb-3">
         <div class="card-header" style="color: {{$project->type->color}}">
-            <h1>{{$project->type->name}}</h1>
+            <h1>
+                {{$project->type->name}}
+                @foreach ($project->technologies as $technology)
+                <span class="fs-3" style="color: {{$technology->color}}">{{$technology->name}} vs: {{$technology->versione}}</span>
+                @endforeach
+            </h1>
+
         </div>
         <div class="card-body">
             <h5 class="card-title">{{$project['title']}}</h5>

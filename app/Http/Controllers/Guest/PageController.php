@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Technology;  
 use App\Models\Type;
 use Illuminate\Http\Request;
 
@@ -14,16 +15,19 @@ class PageController extends Controller
         
         $projects = Project::paginate(5);
         $types = Type::all();
+        $technologies = Technology::all();
 
-        return view('guest.index', compact('projects','types'));
+        return view('guest.index', compact('projects','types', 'technologies'));
 
 
     }
 
     public function show(Project $project){
 
+        $types = Type::all();
+        $technologies = Technology::all();
 
-        return view('guest.show', compact('project'));
+        return view('guest.show', compact('project','types', 'technologies'));
 
     }
 
@@ -35,7 +39,12 @@ class PageController extends Controller
         $filterProjects = Project::where('type_id',$type->id)->get();
 
         $types = Type::all();
+        $technologies = Technology::all();
+
         
-        return view('guest.type', compact('filterProjects', 'types'));
+        return view('guest.type', compact('filterProjects','types','technologies'));
     }
+
+    
+
 }
