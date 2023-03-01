@@ -26,6 +26,7 @@
                 <th scope="col">name</th>
                 <th scope="col">color</th>
                 <th scope="col">versione</th>
+                <th scope="col">number of project</th>
                 <th scope="col">operations</th>
             </tr>
         </thead>
@@ -36,6 +37,7 @@
                 <td>{{$technology['name']}}</td>
                 <td>{{$technology['color']}}</td>
                 <td>{{$technology['versione']}}</td>
+                <td>{{count($technology->projects)}}</td>
                 <td>
                     <a href="{{route('admin.technology.show',$technology['id'])}}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
                     <a href="{{route('admin.technology.edit',$technology['id'])}}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>

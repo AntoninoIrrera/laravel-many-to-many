@@ -12,6 +12,6 @@ class Type extends Model
     protected $fillable = ['name', 'color', 'image'];
 
     public function projects(){
-        return $this->hasMany(Type::class);
+        return $this->hasMany(Project::class);
     }
 }

@@ -25,6 +25,7 @@
                 <th scope="col">id</th>
                 <th scope="col">name</th>
                 <th scope="col">color</th>
+                <th scope="col">number of project</th>
                 <th scope="col">operations</th>
             </tr>
         </thead>
@@ -34,6 +35,7 @@
                 <th scope="row">{{$type['id']}}</th>
                 <td>{{$type['name']}}</td>
                 <td>{{$type['color']}}</td>
+                <td>{{count($type->projects)}}</td>
                 <td>
                     <a href="{{route('admin.type.show',$type['id'])}}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
                     <a href="{{route('admin.type.edit',$type['id'])}}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
