@@ -38,7 +38,14 @@
 
         <div class="mb-3">
             @foreach($technologies as $technology)
-            <input type="checkbox" class="form-check-input {{$errors->has('technologies') ? 'is-invalid' : '' }} " {{$project->technologies->contains($technology->id) ? 'checked' : ''}} name="technologies[]" value="{{$technology->id}}">
+            <input type="checkbox" class="form-check-input {{$errors->has('technologies') ? 'is-invalid' : '' }} " name="technologies[]" value="{{$technology->id}}" 
+            @if($errors->any())
+            @checked(in_array($technology->id,old('technologies',[])))
+            @else
+            @checked($project->technologies->contains($technology->id))
+            @endif
+            >
+
             <label class="form-check-label"> {{$technology->name}} </label>
             @endforeach
             @if($errors->has('technologies'))
