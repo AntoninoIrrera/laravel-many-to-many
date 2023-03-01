@@ -4,7 +4,7 @@
 
 <div class="container">
 
-    @foreach($type->projects as $project)
+    @foreach($technology->projects as $project)
     <div class="card">
         <div class="card-header" style="color: {{$project->type->color}}">
             @foreach ($project->technologies as $technology)

@@ -13,6 +13,11 @@
                     <a class="nav-link" href="{{route('guest.type',$type->id) }}">{{ $type->name }}</a>
                 </li>
                 @endforeach
+                @foreach($technologies as $technology)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('guest.technology',$technology->id) }}">{{ $technology->name }}</a>
+                </li>
+                @endforeach
             </ul>
         </div>
     </div>

@@ -36,15 +36,25 @@ class PageController extends Controller
     {
 
 
-        $filterProjects = Project::where('type_id',$type->id)->get();
+        // $filterProjects = Project::where('type_id',$type->id)->get();
 
-        $types = Type::all();
-        $technologies = Technology::all();
+        // $types = Type::all();
 
         
-        return view('guest.type', compact('filterProjects','types','technologies'));
+        return view('guest.type', compact('type','project'));
     }
 
+    public function technology(Technology $technology, Project $project)
+    {
+
+
+        // $filterProjects = Project::where('type_id',$type->id)->get();
+
+        // $types = Type::all();
+
+
+        return view('guest.technology', compact('technology','project'));
+    }
     
 
 }
